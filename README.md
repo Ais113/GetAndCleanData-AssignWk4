@@ -12,6 +12,9 @@ Further information on the Dataset and the variables collected can be found in t
 
 Dataset
 -------
+
+Files to be downloaded and read into R: 
+
 * 'README.txt'
 * 'features_info.txt': Shows information about the variables used on the feature vector.
 * 'features.txt': List of all features.
@@ -32,13 +35,13 @@ The following files are available for the train and test data. Their description
 Transformations carried out to move from the Raw Data to the Tidy data: 
 -----------------------------------------------------------------------
 1. First step was to load any required packages
-			library(dplyr)
-			library(data.table)
-			library(tidyr)
+* library(dplyr)
+* library(data.table)
+* library(tidyr)
 
 2. Next step was to Download all of the data outlined above from the link <https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip>
 
-The following code was used to do this:
+   The following code was used to do this:
 	
 			#Download the zipped dataset
 				filename <- "Coursera_DS3_Final.zip"
@@ -68,9 +71,9 @@ The following code was used to do this:
 
 4. The next step was to merge the training and test databases, and combine all 3 of the data sets into one:
  
-* x_data - contains all of the various different readings from the sensor signals (accelerometer and gyroscope) for the train and test data
-* y-data - is the list of activity codes in each row corresponding to each of the measurements in x_data
-* subject_data - is the list of subjects in each row corresponding to the activity code and each of the measurements in x_data
+   * x_data - contains all of the various different readings from the sensor signals (accelerometer and gyroscope) for the train and test data
+   * y-data - is the list of activity codes in each row corresponding to each of the measurements in x_data
+   * subject_data - is the list of subjects in each row corresponding to the activity code and each of the measurements in x_data
 
 
 				#code  to merge all of the data
@@ -80,12 +83,12 @@ The following code was used to do this:
 
 					Combined_data <- cbind(subject_data, y_data, x_data)
 
-When all are combined in Combined_data we have a data set with for each subject and each activity a corresponding 561 different measurements relating to inertial signals
+   When all are combined in Combined_data we have a data set with for each subject and each activity a corresponding 561 different measurements relating to inertial signals
 
 5. The next part of the code extracts only the measurements on the mean and standard deviation for each measurement.
 
-* From the list of all variables measured, took any feature where the name includes either mean or std.
-* Then from the Combined_data set created above, extract only the columns that are on this list of having either mean or std
+  * From the list of all variables measured, took any feature where the name includes either mean or std.
+  * Then from the Combined_data set created above, extract only the columns that are on this list of having either mean or std
 
 	
 				DatawithMeanSD <- grep("mean\\(\\)|std\\(\\)",features$features,value=TRUE) #list of variables that contain mean and Std Dev
