@@ -12,14 +12,14 @@ Further information on the Dataset and the variables collected can be found in t
 
 Dataset
 -------
-•'README.txt'
-•'features_info.txt': Shows information about the variables used on the feature vector.
-•'features.txt': List of all features.
-•'activity_labels.txt': Links the class labels with their activity name.
-•'train/X_train.txt': Training set.
-•'train/y_train.txt': Training labels.
-•'test/X_test.txt': Test set.
-•'test/y_test.txt': Test labels.
+-'README.txt'
+-'features_info.txt': Shows information about the variables used on the feature vector.
+-'features.txt': List of all features.
+-'activity_labels.txt': Links the class labels with their activity name.
+-'train/X_train.txt': Training set.
+-'train/y_train.txt': Training labels.
+-'test/X_test.txt': Test set.
+-'test/y_test.txt': Test labels.
 
 
 The following files are available for the train and test data. Their descriptions are equivalent. 
@@ -31,12 +31,12 @@ The following files are available for the train and test data. Their description
 
 Transformations carried out to move from the Raw Data to the Tidy data: 
 -----------------------------------------------------------------------
-1.First step was to load any required packages
+1. First step was to load any required packages
 			library(dplyr)
 			library(data.table)
 			library(tidyr)
 
-2.Next step was to Download all of the data outlined above from the link <https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip>
+2. Next step was to Download all of the data outlined above from the link <https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip>
 The following code was used to do this:
 	
 			#Download the zipped dataset
@@ -51,7 +51,7 @@ The following code was used to do this:
 		  			unzip(filename) 
 				}
 
-3.I then imported and assigned all of the various data tables and named them accordingly
+3. I then imported and assigned all of the various data tables and named them accordingly
 		
 				features <- read.table("UCI HAR Dataset/features.txt", col.names = c("n","functions"))
 				activities <- read.table("UCI HAR Dataset/activity_labels.txt", col.names = c("code", "activity"))
@@ -65,7 +65,7 @@ The following code was used to do this:
 				y_train <- read.table("UCI HAR Dataset/train/y_train.txt", col.names = "code")
 	
 
-4.The next step was to merge the training and test databases, and combine all 3 of the data sets into one:
+4. The next step was to merge the training and test databases, and combine all 3 of the data sets into one:
  
 •x_data - contains all of the various different readings from the sensor signals (accelerometer and gyroscope) for the train and test data
 •y-data - is the list of activity codes in each row corresponding to each of the measurements in x_data
@@ -81,7 +81,7 @@ The following code was used to do this:
 
 When all are combined in Combined_data we have a data set with for each subject and each activity a corresponding 561 different measurements relating to inertial signals
 
-5.The next part of the code extracts only the measurements on the mean and standard deviation for each measurement.
+5. The next part of the code extracts only the measurements on the mean and standard deviation for each measurement.
 •From the list of all variables measured, took any feature where the name includes either mean or std.
 •Then from the Combined_data set created above, extract only the columns that are on this list of having either mean or std
 
@@ -97,7 +97,7 @@ When all are combined in Combined_data we have a data set with for each subject 
 					TidyData <- merge(TidyData, activities, by = "code") 
 					TidyData <- TidyData[,c("subject","code", "activity", DatawithMeanSD)] #reorder the columns so that activity description is to the front of the dataset
 
-7.Need to appropriately label the dataset with descriptive variable names. First view the contents of the data set in order to determine how we should adjust the names
+7. Need to appropriately label the dataset with descriptive variable names. First view the contents of the data set in order to determine how we should adjust the names
 
 				head(str(TidyData),2)
 
